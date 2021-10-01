@@ -14,10 +14,9 @@ def download_data(
     segment: float,
     channel: str = "BH*",
     location: str = "00",
-    overlap: float = 0.01,
     dry: bool = False,
     outdir: str = "."):
-    """Downloads data in bulk
+    """Downloads data in bulk and writes them to waveform and station directory.
 
     Parameters
     ----------
@@ -33,9 +32,6 @@ def download_data(
         channel, by default "00"
     location : str, optional
         location, by default "00"
-    overlap : float, optional
-        how much you want the segments to overlap in fraction of 
-        segment, by default 0.01
     """
 
     # Create segments
