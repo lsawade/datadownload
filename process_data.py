@@ -26,8 +26,8 @@ st.merge()
 # Quick processing
 print("Removing response ...")
 st.attach_response(inv)
-pre_filt = [0.0001, 0.0005, 0.003, 0.001]
-st.remove_response(inv, output='VEL', water_level=100, pre_filt=pre_filt)
+pre_filt = [0.0009, 0.001, 0.003, 0.001]
+st.remove_response(inv, output='VEL', water_level=10, pre_filt=pre_filt)
 
 # %%
 print("Filtering and resampling ...")
