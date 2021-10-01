@@ -5,7 +5,7 @@
 If you don't have obspy installed,
 
 ```bash
-conda env create -f environments.yml
+conda env create -f environment.yml
 ```
 then activate
 ```bash
