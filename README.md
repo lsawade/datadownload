@@ -18,3 +18,9 @@ conda activate pages_obspy
 python download_stations.py
 ```
 
+This should get you from 0 to Normal Mode spectrogram. I haven't played too much
+with the processing, but I assume you have your own workflow.
+
+Note the `st.merge()` in `download_stations.py`. This merges your downloaded 
+traces.
+

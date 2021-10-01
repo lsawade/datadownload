@@ -47,7 +47,7 @@ inv = read_inventory(os.path.join(stationdir, "*.xml"))
 stbu = st.copy()
 
 # %%
-# Merge traces
+# Merge traces IMPORTANT 
 st.merge()
 
 # %%
@@ -57,13 +57,29 @@ pre_filt = [0.0005, 0.001, 0.003, 0.001]
 st.remove_response(inv, output='VEL', water_level=60, pre_filt=pre_filt)
 
 # %%
-sampling_rate = 0.
+sampling_rate = 0.1
 st.filter("bandpass", freqmin=pre_filt[1], freqmax=pre_filt[2])
 st.resample(sampling_rate, window='hanning')
 
 # %%
 # Plot the third trace
-st[0].plot()
+st[1].plot()
 
-# Plot specttrogram of third trace
-st[1].spectrogram()
+# %%
+# Get raw data
+t = st[1].times()
+dt = t[1] - t[0]
+y = st[1].data
+
+
+# %%
+import numpy as np
+Y    = np.fft.fft(y)
+freq = np.fft.fftfreq(len(y), dt)
+
+# %%
+# Plot 
+import matplotlib.pyplot as plt
+plt.plot(freq, np.abs(Y))
+plt.xlim(0.0005, 0.0032)
+plt.show()

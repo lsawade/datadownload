@@ -42,16 +42,12 @@ def download_data(
     segments = np.arange(start, end + segment, segment)
     segfrac = overlap * segment
 
-    # Create bulk request
+    # Create bulk request for an inventory
     bulk = list()
     for network, stations in stationdict.items():
         for station in stations:
             bulk.append(
                     (network, station, location, channel, start, end))
-            # for _i in range(len(segments)-1):
-            #     bulk.append(
-            #         (network, station, location, channel, 
-            #          segments[_i]-segfrac, segments[_i+1]+segfrac))
     
     if dry:
         for row in bulk:
@@ -68,15 +64,15 @@ def download_data(
     t1 = time()
     print(f'done after {t1-t0:.2f} s.')
 
-    print(inv)
-    # Domain and restrictions
-    
+
+    # Domain
     # Note that the domain encloses the entire world.
     # The domain is a required input, but since we know which stations,
     # we can restrict the download using the inventory we fetched. 
     domain = RectangularDomain(minlatitude=-90, maxlatitude=90,
                            minlongitude=-180, maxlongitude=180)
 
+    # Restrictions
     restrictions = Restrictions(
         # Start and end times
         starttime=start,
@@ -89,8 +85,6 @@ def download_data(
         limit_stations_to_inventory=inv)
 
     # The mass downloader enables parallel download.
-    waveform_storage = os.path.join(outdir, "waveforms")
-    station_storage = os.path.join(outdir, "stations")
     print('Downloading the waveforms ...')
     t0 = time()
     mdl = MassDownloader(providers=["IRIS"])
@@ -100,11 +94,5 @@ def download_data(
     t1 = time()
     print(f'done after {t1-t0:.2f} s.')
 
-    # print('Downloading the waveforms ...')
-    # t0 = time()
-    # st = client.get_waveforms_bulk(bulk)
-    # t1 = time()
-    # print(f'done after {t1-t0:.2f} s.')
-    # return st, inv
 
 
