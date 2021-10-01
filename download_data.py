@@ -34,10 +34,6 @@ def download_data(
         location, by default "00"
     """
 
-    # Create segments
-    segments = np.arange(start, end + segment, segment)
-    segfrac = overlap * segment
-
     # Create bulk request for an inventory
     bulk = list()
     for network, stations in stationdict.items():
