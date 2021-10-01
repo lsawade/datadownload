@@ -1,16 +1,18 @@
-# Download Data and stitch them
+# Download seismic data and stitch them together
 
 ## Create conda environment from environment file
+
+If you don't have obspy installed,
 
 ```bash
 conda env create -f environments.yml
 ```
-
-Then activate
+then activate
 ```bash
-conda activate pages_obspy
+conda activate obspyenv
 ```
 
+Otherwise, skip this step.
 
 ## Run scripts
 

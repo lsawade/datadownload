@@ -1,4 +1,4 @@
-name: pages_obspy
+name: obspyenv
 channels:
   - conda-forge
   - defaults
